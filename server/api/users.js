@@ -5,6 +5,7 @@ const Promise = require('bluebird');
 const utils = require('../utils/baseUtils');
 const logUtils = require('../utils/logUtils');
 const userModel = require('../mongoDB/models/user');
+const groupModel = require('../mongoDB/models/group');
 const errors = require('../utils/errors');
 const responses = require('../utils/responses');
 
@@ -16,10 +17,24 @@ router.route('/users')
   .get(function(req, res) { 
     return Promise.resolve(true)
       .then(() => {
-        return Promise.resolve(userModel.query());
+        const filter = req.query;
+        const tasks = [];
+
+        tasks.push(userModel.query(filter));
+        tasks.push(groupModel.query());
+
+        return Promise.all(tasks);
       })
-      .then(data => {
-        return utils.sendResponse(res, data);
+      .spread((users, groups)  => {
+        users.forEach(user => {
+          if (user.groupId) {  // todo: left join
+            const userGroup = groups.find(group => group.id.toString() === user.groupId.toString());
+            user.groupName = !!userGroup ? userGroup.name : 'Unmanaged';
+          } else {
+            user.groupName = 'Unmanaged';
+          }
+        });
+        return utils.sendResponse(res, users);
       })
       .catch((error) => {
 				return utils.sendErrorResponse(res, error);

@@ -34,8 +34,9 @@ app.use(bodyParser.json({type: 'application/json'}));
 
 // ---------------------------------------------------------------
 // запросы к api
-app.use('/api', require('./api/users'));
 app.use('/api', require('./api/groups'));
+app.use('/api', require('./api/users'));
+app.use('/api', require('./api/usersByGroups'));
 
 // ---------------------------------------------------------------
 

@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const ObjectId = require('mongoose').Types.ObjectId;
-const groupSchema = require('../schemas/user');
+const groupSchema = require('../schemas/group');
 
 // модель группы
 const GroupModel = mongoose.model('Group', groupSchema);
