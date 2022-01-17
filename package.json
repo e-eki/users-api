@@ -1,0 +1,54 @@
+{
+    "name": "users-api",
+    "version": "0.9.0",
+    "description": "",
+    "main": "index.js",
+    "dependencies": {
+        "axios": "^0.18.0",
+        "bluebird": "^3.5.2",
+        "body-parser": "^1.18.3",
+        "express": "^4.16.3",
+        "mongoose": ">=5.7.5",
+        "path": "^0.12.7"
+    },
+    "devDependencies": {
+        "autoprefixer": "^9.1.1",
+        "babel": "^6.23.0",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^7.1.4",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-react": "^6.24.1",
+        "css-loader": "^0.28.11",
+        "eslint": "^5.3.0",
+        "file-loader": "^1.1.11",
+        "image-webpack-loader": "^4.3.1",
+        "less": "^3.8.1",
+        "less-loader": "^4.1.0",
+        "nodemon": "^1.18.4",
+        "path": "^0.12.7",
+        "postcss-loader": "^3.0.0",
+        "size-limit": "^0.18.5",
+        "style-loader": "^0.21.0",
+        "uglifyjs-webpack-plugin": "^1.2.7",
+        "webpack": "^4.12.2",
+        "webpack-cli": "^3.0.8",
+        "webpack-command": "^0.3.0",
+        "webpack-dev-server": "^3.1.4"
+    },
+    "scripts": {
+        "test": "node server/index.js",
+        "start": "set NODE_ENV=production&& node server/index.js",
+        "dev": "set NODE_ENV=development&& nodemon --inspect server/index.js",
+        "prod": "set NODE_ENV=production&& nodemon server/index.js",
+        "size": "size-limit"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/e-eki/users-api.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "engines": {
+        "node": "12.x"
+    }
+}
