@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 // схема группы
 const groupSchema = new Schema(
 	{
-		name: { type: String },     // имя
+		name: { type: String },     // наименование
 	},
 	{versionKey: false}
 );

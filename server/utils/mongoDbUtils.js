@@ -9,7 +9,7 @@ module.exports = {
 	setUpConnection: function() {
 		mongoose.connect(config.db.mongo.url, config.db.mongo.options, function (err) {
 			if (err) {
-				console.error('Db connection error:', err.stack);   // как лучше обработать ошибку??
+				console.error('Db connection error:', err.stack);
 				process.exit();
 			}
 			else {

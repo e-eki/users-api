@@ -1,0 +1,13 @@
+
+###
+GET /api/groups/ HTTP/1.1
+Host: localhost:3000
+
+###
+POST /api/groups/ HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+	"name": "1111"
+}

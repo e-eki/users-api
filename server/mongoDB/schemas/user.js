@@ -14,6 +14,8 @@ const userSchema = new Schema(
 		position: { type: String },      // должность
 		phone: { type: String },         // телефон
 		groupId: Schema.Types.ObjectId,  // id группы
+		groupName: { type: String },     // наименование группы (нарушение нормальной формы БД, тк наименование 
+		                                 // группы уже есть в group - для упрощения запросов и сортировки-поиска по данному полю)
 	},
 	{versionKey: false}
 );

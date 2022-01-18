@@ -1,8 +1,5 @@
 'use strict';
 
-const Promise = require('bluebird');
-// const uuidv5 = require('uuid/v5');
-const config = require('../config');
 const errors = require('./errors');
 const responses = require('./responses');
 
@@ -51,11 +48,6 @@ const utils = new function() {
 
         return res.status(status).send(message);
     };
-
-    // //генерирует уникальный идентификатор
-    // this.makeUId = function(string) {
-    //     return uuidv5(string, uuidv5.URL);   //??
-    // };
 };
 
 module.exports = utils;

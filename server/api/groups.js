@@ -16,7 +16,7 @@ router.route('/groups')
   .get(function(req, res) { 
     return Promise.resolve(true)
       .then(() => {
-        return Promise.resolve(groupModel.query());
+        return groupModel.query();
       })
       .then(data => {
         return utils.sendResponse(res, data);
@@ -59,6 +59,32 @@ router.route('/groups')
 				return utils.sendErrorResponse(res, error);
 			});
   })
+  .put(function(req, res) {
+		return utils.sendErrorResponse(res, errors.UNSUPPORTED_METHOD);
+  })
+  .delete(function(req, res) {
+		return utils.sendErrorResponse(res, errors.UNSUPPORTED_METHOD);
+	})
+;
+
+//----- endpoint: /api/groups/:id
+router.route('/groups/:id')
+  // получение группы по ее id
+  .get(function(req, res) { 
+    return Promise.resolve(true)
+      .then(() => {
+        return groupModel.query({id: req.params.id});
+      })
+      .then(data => {
+        return utils.sendResponse(res, data);
+      })
+      .catch((error) => {
+				return utils.sendErrorResponse(res, error);
+      });
+  })
+  .post(function(req, res) {
+		return utils.sendErrorResponse(res, errors.UNSUPPORTED_METHOD);
+	})
   .put(function(req, res) {
 		return utils.sendErrorResponse(res, errors.UNSUPPORTED_METHOD);
   })

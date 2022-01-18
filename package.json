@@ -24,7 +24,6 @@
         "image-webpack-loader": "^4.3.1",
         "less": "^3.8.1",
         "less-loader": "^4.1.0",
-        "multi-users-generator": "^1.0.2",
         "nodemon": "^1.18.4",
         "path": "^0.12.7",
         "postcss-loader": "^3.0.0",

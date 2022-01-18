@@ -1,0 +1,19 @@
+
+###
+GET /api/users/ HTTP/1.1
+Host: localhost:3000
+
+###
+POST /api/users/ HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+	"firstName": "John",
+    "lastName": "Smith",
+    "personalPage": "http://lorempixel.com/123",
+    "email": "aaa111@gmail.com",
+    "position": "programmer",
+    "phone": "9(999)777-88-55",
+    "groupId": "61e59efdcea1a604d813d564"
+}

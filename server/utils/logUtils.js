@@ -6,10 +6,10 @@ const config = require('../config');
 // утилиты для работы с логами
 const logUtils = new function() {
 
-    // логирует ошибки БД в консоль
+    // логгирует ошибки БД в консоль
     this.fileLogDbErrors = function(data) {
         if (data) {
-            const dbResponses = data.length ? data : [data];  //?
+            const dbResponses = data.length ? data : [data];
 
             dbResponses.forEach(dbResponse => {
                 if (dbResponse && dbResponse.errors) {
@@ -48,14 +48,14 @@ const logUtils = new function() {
         });
     }
 
-    // логирует ошибки БД в файл
+    // логгирует ошибки БД в файл
     this.fileLogDbErrors = function(data) {
         return Promise.resolve(true)
             .then(() => {
                 const tasks = [];
 
                 if (data) {
-                    const dbResponses = data.length ? data : [data];  //?
+                    const dbResponses = data.length ? data : [data];
 
                     dbResponses.forEach(dbResponse => {
                         if (dbResponse && dbResponse.errors) {

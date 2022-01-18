@@ -18,23 +18,19 @@ router.route('/users')
     return Promise.resolve(true)
       .then(() => {
         const filter = req.query;
-        const tasks = [];
 
+        const tasks = [];
         tasks.push(userModel.query(filter));
-        tasks.push(groupModel.query());
+        tasks.push(userModel.query({getCount: true, ...filter}));
 
         return Promise.all(tasks);
       })
-      .spread((users, groups)  => {
-        users.forEach(user => {
-          if (user.groupId) {  // todo: left join
-            const userGroup = groups.find(group => group.id.toString() === user.groupId.toString());
-            user.groupName = !!userGroup ? userGroup.name : 'Unmanaged';
-          } else {
-            user.groupName = 'Unmanaged';
-          }
-        });
-        return utils.sendResponse(res, users);
+      .spread((data, count)  => {
+        const result = {
+          data: JSON.stringify(data),
+          total: count
+        };
+        return utils.sendResponse(res, result);
       })
       .catch((error) => {
 				return utils.sendErrorResponse(res, error);
@@ -75,22 +71,33 @@ router.route('/users')
         if (!req.body.phone || req.body.phone == '') {
 					validationErrors.push('empty phone');
 				}
-
         if (validationErrors.length !== 0) {
 					throw utils.initError(errors.FORBIDDEN, validationErrors);
         }
 
-        const data = {
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          personalPage: req.body.personalPage,
-          email: req.body.email,
-          position: req.body.position,
-          phone: req.body.phone,
-          groupId: req.body.groupId || null,
+        const tasks = [];
+        if (req.body.groupId) {
+          tasks.push(groupModel.query({id: req.body.groupId}));
+        }
+
+        return Promise.all(tasks);
+      })
+      .spread((groups) => {
+        const data = req.body;
+        const group = (!!groups && !!groups[0]) ? groups[0] : null;
+
+        const user = {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          personalPage: data.personalPage,
+          email: data.email,
+          position: data.position,
+          phone: data.phone,
+          groupId: group?.id || null,
+          groupName: group?.name || null
         };
 
-        return userModel.create(data);
+        return userModel.create(user);
       })
       .then(dbResponse => {
         logUtils.fileLogDbErrors(dbResponse);
