@@ -6,12 +6,16 @@ module.exports = {
     version: '1.0'
     
     // настройки сервера
-    , server: {
-        port: 3000   //process.env.PORT || 3000
-        , host: 'localhost'
-        , protocol: 'http'
+    // , server: {
+    //     port: 3000   //process.env.PORT || 3000
+    //     , host: 'localhost'
+    //     , protocol: 'http'
+    // }
+    , server: {    // для heroku
+        port: process.env.PORT || 8000
+        , host: 'test-task-users-app.herokuapp.com'
+        , protocol: 'https'
     }
-
     // название файла с логами БД
     , logFileName: 'dbLogs.log'
     // настройки соединения с БД
